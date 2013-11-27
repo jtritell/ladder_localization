@@ -1,0 +1,10 @@
+float64 xpos
+float64 ypos
+float64 spacing_first
+float64 spacing
+float64 inclination
+int rungs
+float64 legswidth
+float64 railheight
+float64 wlakwayrailheight
+float64 direction
