@@ -192,7 +192,13 @@ void moveFrame(const ros::TimerEvent){
 
   t.setOrigin(reference);
   t.setRotation(rotation);
-  br.sendTransform(tf::StampedTransform(t,time, "workstation_robot_centric", "workstation_ladder"));
+  br.sendTransform(tf::StampedTransform(t,time, "leftFoot", "workstation_ladder"));
+  /*
+  tf::Transform t2;
+  t2.setRotation(tf::Quaternion());
+  t2.setOrigin(tf::Vector3());
+  br.sendTransform(tf::StampedTransform(t2,time, "leftFoot", "leftFoot"));
+  */
 }
 
 void moveReference(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback ){
@@ -411,7 +417,7 @@ Marker makeModel(std::string filename){
   model_marker.color.r = 0.5;
   model_marker.color.g = 0.5;
   model_marker.color.b = 0.5;
-  model_marker.color.a = 1.0;
+  model_marker.color.a = 0.5;
   return model_marker;
 }
 
@@ -419,7 +425,7 @@ Marker makeModel(std::string filename){
 void makeModelMarker(std::string mesh, geometry_msgs::Pose pose = origin, geometry_msgs::Vector3& scale = toscale){
   InteractiveMarker int_marker;
   int_marker.header.frame_id = "workstation_ladder";
-  int_marker.scale = 1;
+  int_marker.scale = .5;
   int_marker.name = mesh;
   int_marker.pose = pose;
   InteractiveMarkerControl control;
@@ -442,7 +448,7 @@ void makeModelMarker(std::string mesh, geometry_msgs::Pose pose = origin, geomet
 
 void makeCenterMarker(geometry_msgs::Pose pose){
   InteractiveMarker int_marker;
-  int_marker.header.frame_id = "workstation_robot_centric";
+  int_marker.header.frame_id = "leftFoot";
   int_marker.name = "MoveAll";
   int_marker.pose = pose;
   InteractiveMarkerControl box_control;
@@ -505,7 +511,7 @@ void makeCenterMarker(geometry_msgs::Pose pose){
 
 void makeSideMarker(geometry_msgs::Pose pose){
   InteractiveMarker int_marker;
-  int_marker.header.frame_id = "workstation_robot_centric";
+  int_marker.header.frame_id = "leftFoot";
   int_marker.name = "RotateAll";
   int_marker.pose = pose;
   InteractiveMarkerControl box_control;
@@ -546,7 +552,7 @@ void makeHeightMarker(geometry_msgs::Pose pose){
   int_marker.header.frame_id = "workstation_ladder";
   int_marker.name = "ChangeHeight";
   int_marker.pose = pose;
-
+  int_marker.scale = 0.5;
   InteractiveMarkerControl move_control;
   
   move_control.interaction_mode =
@@ -576,6 +582,7 @@ void makeRailMarker(geometry_msgs::Pose pose){
   int_marker.header.frame_id = "workstation_ladder";
   int_marker.name = "RailHeight";
   int_marker.pose = pose;
+  int_marker.scale = 0.5;
 
   InteractiveMarkerControl move_control;
   
@@ -600,6 +607,7 @@ void makeStairRailMarker(geometry_msgs::Pose pose){
   int_marker.header.frame_id = "workstation_ladder";
   int_marker.name = "StairRailHeight";
   int_marker.pose = pose;
+  int_marker.scale = 0.5;
 
   InteractiveMarkerControl move_control;
   
@@ -623,6 +631,7 @@ void makeRungMarker(){
   InteractiveMarker int_marker;
   int_marker.header.frame_id = "workstation_ladder";
   int_marker.name = "BottomRung";
+  int_marker.scale = 0.5;
 
   int_marker.pose.position.x = rung_spacing_x;
   int_marker.pose.position.z = rung_spacing_z;
