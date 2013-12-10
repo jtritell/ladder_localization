@@ -43,6 +43,7 @@ add_executable(fit_ladder src/fit_ladder.cpp)
 target_link_libraries(fit_ladder
    ${catkin_LIBRARIES}
 )
+add_dependencies(fit_ladder ${catkin_EXPORTED_TARGETS})
 
 #add_executable(load_ladder src/load_ladder.cpp)
 #target_link_libraries(load_ladder

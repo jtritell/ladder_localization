@@ -17,6 +17,7 @@
 #include <std_msgs/String.h>
 #include <std_msgs/Int32.h>
 #include <ladder_shaper/LadderState.h>
+
 using namespace visualization_msgs;
 using namespace std;
 
@@ -725,7 +726,7 @@ int main(int argc, char** argv){
     ros::NodeHandle n;
 
     ros::Timer frame_timer = n.createTimer(ros::Duration(0.05), moveFrame);
-    state_pub =n.advertise<ladder_shaper::LadderState>("ladder_state",1000);
+    state_pub =n.advertise<ladder_shaper::LadderState>("ladder_state",1000,true);
     num_rungs = 6;
     resetLadder(num_rungs);
     ros::Subscriber sub = n.subscribe("/export",1000,exportCallback);
